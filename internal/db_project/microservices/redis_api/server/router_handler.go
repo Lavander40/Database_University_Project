@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-
 	"github.com/gorilla/mux"
 )
 
@@ -26,7 +25,6 @@ func (s *Server) handleGet() http.HandlerFunc {
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		//w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(data)
 	}
 }

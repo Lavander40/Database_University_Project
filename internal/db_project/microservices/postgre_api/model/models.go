@@ -1,9 +1,18 @@
 package model
 
-type Group struct {
+type Attendance struct {
 	Id       string `json:"id"`
-	DepartId string `json:"depart_id"`
-	SpecId   string `json:"spec_id"`
+	Date string `json:"date"`
+	StudentId   string `json:"stud_id"`
+	ScheduleId string `json:"sched_id"`
+}
+
+type Lesson struct {
+	Id      string `json:"id"`
+	Type    string `json:"type"`
+	Date    string `json:"date"`
+	EquipId string `json:"equip_id"`
+	CourseId string `json:"course_id"`
 }
 
 type Student struct {
@@ -12,24 +21,44 @@ type Student struct {
 	GroupId string `json:"group_id"`
 }
 
-type Lesson struct {
-	Id      string `json:"id"`
-	Type    string `json:"type"`
-	EquipId string `json:"equip_id"`
-	Date    string `json:"date"`
-	GradeId string `json:"grade_id"`
-}
-
-type Attendance struct {
-	Id      string `json:"id"`
-	StudId  string `json:"stud_id"`
-	SchedId string `json:"sched_id"`
-	Date    string `json:"date"`
-}
-
 type Schedule struct {
 	Id       string `json:"id"`
 	GroupId  string `json:"group_id"`
 	LessonId string `json:"lesson_id"`
-	AudId    string `json:"aud_id"`
+	AudId    string `json:"room_id"`
+}
+
+type Equipment struct {
+	Id       string `json:"id"`
+	Name string `json:"equip"`
+}
+
+type Group struct {
+	Id       string `json:"id"`
+	DepartId string `json:"depart_id"`
+	SpecId   string `json:"spec_id"`
+}
+
+type Room struct {
+	Id      string `json:"id"`
+	Number  string `json:"number"`
+}
+
+type Course struct {
+	Id       string `json:"id"`
+	Name string `json:"name"`
+	Desc   string `json:"desc"`
+}
+
+type Speciality struct {
+	Id       string `json:"id"`
+	Name string `json:"name"`
+	Code   string `json:"code"`
+	DepartId string `json:"depart_id"`
+}
+
+type Speciality_Course struct {
+	Id       string `json:"id"`
+	SpecId   string `json:"spec_id"`
+	CourseIdId string `json:"course_id"`
 }
