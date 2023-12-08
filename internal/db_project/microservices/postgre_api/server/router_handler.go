@@ -1,6 +1,7 @@
 package server
 
 import (
+	"db_project/internal/db_project/microservices/postgre_api/model"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -12,6 +13,25 @@ import (
 func (s *Server) handleIndex() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, "postgre api server response")
+	}
+}
+
+func (s *Server) handleSet() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var student model.Student
+
+		err := json.NewDecoder(r.Body).Decode(&student)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		if err := s.store.StudentStore.Set(student); err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		w.WriteHeader(http.StatusCreated)
 	}
 }
 

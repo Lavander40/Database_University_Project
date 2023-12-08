@@ -6,6 +6,15 @@ type StudentStore struct {
 	store *Store
 }
 
+func (s *StudentStore) Set(student model.Student) error {
+	_, err := s.store.db.Exec("INSERT INTO students (name, group_id) VALUES ($1, $2)", student.Name, student.GroupId)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (s *StudentStore) Get(studentId int) (model.Student, error) {
 	var student model.Student
 

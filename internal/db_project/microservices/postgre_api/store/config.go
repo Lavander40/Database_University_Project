@@ -12,7 +12,7 @@ func NewConfig() *Config {
 	return &Config{
 		host: "localhost",
 		port: "5432",
-		user: "root",
+		user: "postgres",
 		pass: "root",
 		db:   "postgre_api",
 	}
