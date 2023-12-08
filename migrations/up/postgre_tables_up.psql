@@ -10,13 +10,13 @@ CREATE TABLE rooms(
 
 CREATE TABLE courses(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
+    naming VARCHAR(30) NOT NULL,
     description VARCHAR(60)
 );
 
 CREATE TABLE specialities(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
+    naming VARCHAR(30) NOT NULL,
     code VARCHAR(10),
     depart_id INT NOT NULL
 );
@@ -30,14 +30,14 @@ CREATE TABLE groups(
 
 CREATE TABLE students(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
+    full_name VARCHAR(60) NOT NULL,
     group_id INT NOT NULL,
     FOREIGN KEY (group_id) REFERENCES groups(id)
 );
 
 CREATE TABLE lessons(
     id SERIAL PRIMARY KEY,
-    type varchar(30) NOT NULL,
+    typing varchar(30) NOT NULL,
     date INT NOT NULL,
     equip_id INT NOT NULL,
     course_id INT NOT NULL,

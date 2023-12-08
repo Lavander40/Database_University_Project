@@ -31,7 +31,6 @@ func (s *Store) Open() error {
 	}
 
 	s.db = db
-	defer db.Close()
 
 	fmt.Println("postgre connection opened")
 	return nil

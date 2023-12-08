@@ -9,7 +9,7 @@ type Attendance struct {
 
 type Lesson struct {
 	Id      string `json:"id"`
-	Type    string `json:"type"`
+	Type    string `json:"typing"`
 	Date    string `json:"date"`
 	EquipId string `json:"equip_id"`
 	CourseId string `json:"course_id"`
@@ -17,7 +17,7 @@ type Lesson struct {
 
 type Student struct {
 	Id      string `json:"id"`
-	Name    string `json:"name"`
+	Name    string `json:"full_name"`
 	GroupId string `json:"group_id"`
 }
 
@@ -46,13 +46,13 @@ type Room struct {
 
 type Course struct {
 	Id       string `json:"id"`
-	Name string `json:"name"`
+	Name string `json:"naming"`
 	Desc   string `json:"desc"`
 }
 
 type Speciality struct {
 	Id       string `json:"id"`
-	Name string `json:"name"`
+	Name string `json:"naming"`
 	Code   string `json:"code"`
 	DepartId string `json:"depart_id"`
 }

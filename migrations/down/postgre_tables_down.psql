@@ -1,19 +1,19 @@
-DROP TABLE attendances;
+DROP TABLE attendances CASCADE;
 
-DROP TABLE lessons;
+DROP TABLE lessons CASCADE;
 
-DROP TABLE students;
+DROP TABLE students CASCADE;
 
-DROP TABLE schedules;
+DROP TABLE schedules CASCADE;
 
-DROP TABLE equipments;
+DROP TABLE equipments CASCADE;
 
-DROP TABLE groups;
+DROP TABLE groups CASCADE;
 
-DROP TABLE rooms;
+DROP TABLE rooms CASCADE;
 
-DROP TABLE courses;
+DROP TABLE courses CASCADE;
 
-DROP TABLE specialities;
+DROP TABLE specialities CASCADE;
 
-DROP TABLE specialities_courses;
+DROP TABLE specialities_courses CASCADE;

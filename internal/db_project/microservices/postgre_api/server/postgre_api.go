@@ -40,7 +40,12 @@ func (s *Server) configureStore() error {
 
 func (s *Server) configureRouter() {
 	s.router.HandleFunc("/", s.handleIndex())
+	
 	s.router.HandleFunc("/student/get", s.handleGetAll()).Methods("GET")
 	s.router.HandleFunc("/student/get/{id}", s.handleGet()).Methods("GET")
 	s.router.HandleFunc("/student/set", s.handleSet()).Methods("POST")
+
+	s.router.HandleFunc("/group/get", s.handleGetAll()).Methods("GET")
+	s.router.HandleFunc("/group/get/{id}", s.handleGet()).Methods("GET")
+	s.router.HandleFunc("/group/set", s.handleSet()).Methods("POST")
 }

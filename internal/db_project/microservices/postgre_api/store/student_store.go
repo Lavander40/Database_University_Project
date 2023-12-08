@@ -1,13 +1,21 @@
 package store
 
-import "db_project/internal/db_project/microservices/postgre_api/model"
+import (
+	"db_project/internal/db_project/microservices/postgre_api/model"
+	"strconv"
+)
 
 type StudentStore struct {
 	store *Store
 }
 
 func (s *StudentStore) Set(student model.Student) error {
-	_, err := s.store.db.Exec("INSERT INTO students (name, group_id) VALUES ($1, $2)", student.Name, student.GroupId)
+	g_id, err := strconv.Atoi(student.GroupId)
+    if err != nil {
+        return err
+    }
+
+	_, err = s.store.db.Exec("INSERT INTO students (full_name, group_id) VALUES ($1, $2)", student.Name, g_id)
 	if err != nil {
 		return err
 	}
