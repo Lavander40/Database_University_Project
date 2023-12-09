@@ -47,7 +47,7 @@ type Room struct {
 type Course struct {
 	Id       string `json:"id"`
 	Name string `json:"naming"`
-	Desc   string `json:"desc"`
+	Description   string `json:"description"`
 }
 
 type Speciality struct {

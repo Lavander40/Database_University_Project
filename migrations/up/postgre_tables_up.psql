@@ -5,7 +5,7 @@ CREATE TABLE equipments(
 
 CREATE TABLE rooms(
     id SERIAL PRIMARY KEY,
-    number INT NOT NULL
+    number VARCHAR(6) NOT NULL
 );
 
 CREATE TABLE courses(
