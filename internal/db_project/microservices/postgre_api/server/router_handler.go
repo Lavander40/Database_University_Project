@@ -31,6 +31,21 @@ func (s *Server) handleSet() http.HandlerFunc {
 			return
 		}
 
+		// body, err := json.Marshal(student)
+		// if err != nil {
+		// 	http.Error(w, err.Error(), http.StatusBadRequest)
+		// 	return
+		// }
+		// res, err := http.NewRequest("POST", "localhost:4041/set", bytes.NewBuffer(body))
+		// if err != nil {
+		// 	http.Error(w, err.Error(), http.StatusBadRequest)
+		// 	return
+		// }
+		// if res.Response.StatusCode != http.StatusCreated {
+		// 	http.Error(w, res.Response.Status, http.StatusBadRequest)
+		// 	return
+		// }
+
 		w.WriteHeader(http.StatusCreated)
 	}
 }
