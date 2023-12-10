@@ -1,9 +1,11 @@
 package server
 
 import (
-	"net/http"
-	"github.com/gorilla/mux"
 	"db_project/internal/db_project/microservices/postgre_api/store"
+	"io"
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type Server struct {
@@ -41,11 +43,37 @@ func (s *Server) configureStore() error {
 func (s *Server) configureRouter() {
 	s.router.HandleFunc("/", s.handleIndex())
 	
-	s.router.HandleFunc("/student/get", s.handleGetAll()).Methods("GET")
-	s.router.HandleFunc("/student/get/{id}", s.handleGet()).Methods("GET")
-	s.router.HandleFunc("/student/set", s.handleSet()).Methods("POST")
+	s.router.HandleFunc("/student/get", s.handleStudentGetAll()).Methods("GET")
+	s.router.HandleFunc("/student/get/{id}", s.handleStudentGet()).Methods("GET")
+	s.router.HandleFunc("/student/set", s.handleStudentSet()).Methods("POST")
 
-	s.router.HandleFunc("/group/get", s.handleGetAll()).Methods("GET")
-	s.router.HandleFunc("/group/get/{id}", s.handleGet()).Methods("GET")
-	s.router.HandleFunc("/group/set", s.handleSet()).Methods("POST")
+	s.router.HandleFunc("/attend/get", s.handleAttendGetAll()).Methods("GET")
+	s.router.HandleFunc("/attend/get/{id}", s.handleAttendGet()).Methods("GET")
+
+	s.router.HandleFunc("/course/get", s.handleCourseGetAll()).Methods("GET")
+	s.router.HandleFunc("/course/get/{id}", s.handleCourseGet()).Methods("GET")
+
+	s.router.HandleFunc("/equip/get", s.handleEquipmentGetAll()).Methods("GET")
+	s.router.HandleFunc("/equip/get/{id}", s.handleEquipmentGet()).Methods("GET")
+
+	s.router.HandleFunc("/group/get", s.handleGroupGetAll()).Methods("GET")
+	s.router.HandleFunc("/group/get/{id}", s.handleGroupGet()).Methods("GET")
+
+	s.router.HandleFunc("/lesson/get", s.handleLessonGetAll()).Methods("GET")
+	s.router.HandleFunc("/lesson/get/{id}", s.handleLessonGet()).Methods("GET")
+
+	s.router.HandleFunc("/room/get", s.handleRoomGetAll()).Methods("GET")
+	s.router.HandleFunc("/room/get/{id}", s.handleRoomGet()).Methods("GET")
+
+	s.router.HandleFunc("/sched/get", s.handleScheduleGetAll()).Methods("GET")
+	s.router.HandleFunc("/sched/get/{id}", s.handleScheduleGet()).Methods("GET")
+
+	s.router.HandleFunc("/spec/get", s.handleSpecialityGetAll()).Methods("GET")
+	s.router.HandleFunc("/spec/get/{id}", s.handleSpecialityGet()).Methods("GET")
+}
+
+func (s *Server) handleIndex() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		io.WriteString(w, "postgre api server response")
+	}
 }

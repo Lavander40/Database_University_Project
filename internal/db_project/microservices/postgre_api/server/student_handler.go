@@ -3,20 +3,13 @@ package server
 import (
 	"db_project/internal/db_project/microservices/postgre_api/model"
 	"encoding/json"
-	"io"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
-func (s *Server) handleIndex() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		io.WriteString(w, "postgre api server response")
-	}
-}
-
-func (s *Server) handleSet() http.HandlerFunc {
+func (s *Server) handleStudentSet() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var student model.Student
 
@@ -50,7 +43,7 @@ func (s *Server) handleSet() http.HandlerFunc {
 	}
 }
 
-func (s *Server) handleGet() http.HandlerFunc {
+func (s *Server) handleStudentGet() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		studId, err := strconv.Atoi(vars["id"])
@@ -70,7 +63,7 @@ func (s *Server) handleGet() http.HandlerFunc {
 	}
 }
 
-func (s *Server) handleGetAll() http.HandlerFunc {
+func (s *Server) handleStudentGetAll() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		data, err := s.store.Student().GetAll()
 		if err != nil {
