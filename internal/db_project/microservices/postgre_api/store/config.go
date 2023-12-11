@@ -14,6 +14,6 @@ func NewConfig() *Config {
 		port: "5432",
 		user: "postgres",
 		pass: "root",
-		db:   "postgre_api",
+		db:   "postgres",
 	}
 }

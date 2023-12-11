@@ -1,6 +1,6 @@
 CREATE TABLE equipments(
     id SERIAL PRIMARY KEY,
-    equip VARCHAR(30) NOT NULL
+    equip VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE rooms(
@@ -10,13 +10,13 @@ CREATE TABLE rooms(
 
 CREATE TABLE courses(
     id SERIAL PRIMARY KEY,
-    naming VARCHAR(30) NOT NULL,
+    naming VARCHAR(60) NOT NULL,
     description VARCHAR(60)
 );
 
 CREATE TABLE specialities(
     id SERIAL PRIMARY KEY,
-    naming VARCHAR(30) NOT NULL,
+    naming VARCHAR(60) NOT NULL,
     code VARCHAR(10),
     depart_id INT NOT NULL
 );

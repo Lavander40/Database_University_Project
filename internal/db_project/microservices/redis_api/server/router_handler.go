@@ -39,7 +39,7 @@ func (s *Server) handleSet() http.HandlerFunc {
 			return
 		}
 
-		if err := s.store.StudentStore.Set(student); err != nil {
+		if err := s.store.Student().Set(student); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}

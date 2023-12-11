@@ -9,18 +9,17 @@ type StudentStore struct {
 	store *Store
 }
 
-func (s *StudentStore) Set(student model.Student) error {
+func (s *StudentStore) Set(student model.Student) (string, error) {
 	g_id, err := strconv.Atoi(student.GroupId)
     if err != nil {
-        return err
+        return err.Error(), err
     }
 
-	_, err = s.store.db.Exec("INSERT INTO students (full_name, group_id) VALUES ($1, $2)", student.Name, g_id)
-	if err != nil {
-		return err
+	if  err = s.store.db.QueryRow("INSERT INTO students (full_name, group_id) VALUES ($1, $2) RETURNING id", student.Name, g_id).Scan(&student.Id); err != nil {
+		return err.Error(), err
 	}
 
-	return nil
+	return student.Id, nil
 }
 
 func (s *StudentStore) Get(studentId int) (model.Student, error) {
