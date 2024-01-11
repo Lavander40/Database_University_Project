@@ -2,7 +2,6 @@ package model
 
 type Attendance struct {
 	Id       string `json:"id"`
-	Date string `json:"date"`
 	StudentId   string `json:"stud_id"`
 	ScheduleId string `json:"sched_id"`
 }
@@ -11,6 +10,7 @@ type Lesson struct {
 	Id      string `json:"id"`
 	Type    string `json:"typing"`
 	Date    string `json:"date"`
+	LectionID string `json:"lection_id"`
 	EquipId string `json:"equip_id"`
 	CourseId string `json:"course_id"`
 }

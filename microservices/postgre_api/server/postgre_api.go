@@ -49,6 +49,7 @@ func (s *Server) configureRouter() {
 
 	s.router.HandleFunc("/attend/get", s.handleAttendGetAll()).Methods("GET")
 	s.router.HandleFunc("/attend/get/{id}", s.handleAttendGet()).Methods("GET")
+	s.router.HandleFunc("/attend/rate", s.handleAttendRate()).Methods("GET")
 
 	s.router.HandleFunc("/course/get", s.handleCourseGetAll()).Methods("GET")
 	s.router.HandleFunc("/course/get/{id}", s.handleCourseGet()).Methods("GET")

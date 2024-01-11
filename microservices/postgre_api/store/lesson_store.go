@@ -10,7 +10,7 @@ func (s *LessonStore) Get(lessonId int) (model.Lesson, error) {
 	var lesson model.Lesson
 
 	row := s.store.db.QueryRow("SELECT * FROM lessons WHERE id = $1", lessonId)
-	if err := row.Scan(&lesson.Id, &lesson.Type, &lesson.Date, &lesson.EquipId, &lesson.CourseId); err != nil {
+	if err := row.Scan(&lesson.Id, &lesson.Type, &lesson.Date, &lesson.LectionID, &lesson.EquipId, &lesson.CourseId); err != nil {
 		return lesson, err
 	}
 
