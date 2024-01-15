@@ -2,17 +2,11 @@ package store
 
 import (
 	"postgre_api/model"
-
 	"github.com/lib/pq"
 )
 
 type AttendanceStore struct {
 	store *Store
-}
-
-type Rate struct{
-	id int
-	score int
 }
 
 func (s *AttendanceStore) Get(attendanceId int) (model.Attendance, error) {
@@ -47,23 +41,22 @@ func (s *AttendanceStore) GetAll() ([]model.Attendance, error) {
 	return attendances, nil
 }
 
-func (s *AttendanceStore) GetRate(lessons, students []int) ([]Rate, error) {
-	var rates []Rate
-
-	rows, err := s.store.db.Query("select students.id, (Select count(id) From attendances Where stud_id = students.id and sched_id in (SELECT id FROM schedules Where lesson_id in $1))/(Select count(id) from lessons where id In $1)::float as score from students where id in $2 order by score asc limit 10;", pq.Array(lessons), pq.Array(students))
+func (s *AttendanceStore) GetRate(lessons, students []int) ([]model.Rate, error) {
+	var rates []model.Rate
+	
+	rows, err := s.store.db.Query("SELECT students.id, (SELECT count(id) FROM attendances WHERE stud_id = students.id AND sched_id IN (SELECT id FROM schedules WHERE lesson_id = ANY($1)))/(SELECT count(id) FROM lessons WHERE id = ANY($1))::float AS score FROM students WHERE id = ANY($2) ORDER BY score ASC LIMIT 10;", pq.Array(lessons), pq.Array(students))
 	if err != nil {
 		return rates, err
 	}
 	defer rows.Close()
 
 	for rows.Next(){
-        rate := Rate{}
-        err := rows.Scan(&rate.id, &rate.score)
+        rate := model.Rate{}
+        err := rows.Scan(&rate.Id, &rate.Score)
         if err != nil{
             return rates, err
         }
         rates = append(rates, rate)
     }
-
 	return rates, nil
 }

@@ -62,3 +62,8 @@ type Speciality_Course struct {
 	SpecId   string `json:"spec_id"`
 	CourseIdId string `json:"course_id"`
 }
+
+type Rate struct{
+	Id int
+	Score float64
+}
