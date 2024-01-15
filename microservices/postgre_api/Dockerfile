@@ -2,9 +2,8 @@ FROM golang:1.21.2
 
 WORKDIR /postgre
 
-COPY go.mod ./
-COPY go.sum ./
-RUN go mod download
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
 
 COPY . ./
 

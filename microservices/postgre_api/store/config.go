@@ -10,10 +10,10 @@ type Config struct {
 
 func NewConfig() *Config {
 	return &Config{
-		host: "localhost",
+		host: "p_db",
 		port: "5432",
 		user: "postgres",
-		pass: "root",
+		pass: "postgres",
 		db:   "postgres",
 	}
 }

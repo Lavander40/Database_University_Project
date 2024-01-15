@@ -28,6 +28,7 @@ func (s *Store) Open() error {
 	})
 
 	if err := db.Ping(ctx).Err(); err != nil {
+		fmt.Println("connect error")
 		return err
 	}
 

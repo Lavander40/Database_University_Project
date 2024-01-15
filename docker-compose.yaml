@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+
+  r_db:
+    image: redis:latest
+    container_name: redis_db
+    restart: always
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - ./db_project/redis:/data
+    networks:
+      - net
+
+  p_db:
+    image: postgres
+    container_name: postgre_db
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d postgres'"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 10s  
+    environment:
+      POSTGRES_DB: postgre
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+       - ./db_project/postgre:/var/lib/postgresql/data
+    networks:
+      - net
+
+  e_db:
+    image: elasticsearch:8.10.2
+    container_name: elastic_db
+    ports:
+      - 9200:9200
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: false
+    volumes:
+      - ./db_project/elastic:/usr/share/elasticsearch/data
+    networks:
+      - net
+
+  redis:
+    build: ./microservices/redis_api
+    container_name: redis_api
+    ports:
+      - 4041:4041
+    depends_on:
+      r_db:
+        condition: service_healthy
+    networks:
+      - net
+
+  postgre:
+    build: ./microservices/postgre_api
+    container_name: postgre_api
+    ports:
+      - 4042:4042
+    depends_on:
+      p_db:
+        condition: service_healthy
+    networks:
+      - net
+
+  elastic:
+    build: ./microservices/elastic_api
+    container_name: elastic_api
+    restart: on-failure
+    ports:
+      - 4043:4043
+    depends_on:
+      - e_db
+    networks:
+      - net
+
+volumes:
+  db_project:
+
+networks:
+  net:

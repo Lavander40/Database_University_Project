@@ -8,7 +8,7 @@ type Config struct {
 
 func NewConfig() *Config {
 	return &Config{
-		addr: "localhost:6379",
+		addr: "r_db:6379",
 		pass: "",
 		db:   0,
 	}

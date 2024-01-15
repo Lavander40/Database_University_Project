@@ -27,9 +27,10 @@ func New() *Store {
 }
 
 func (s *Store) Open() error {
-	dbInfo := fmt.Sprintf("host=%s port=%s user=%s "+"password=%s dbname=%s sslmode=disable", s.config.host, s.config.port, s.config.user, s.config.pass, s.config.db)
+	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", s.config.user, s.config.pass, s.config.host, s.config.port, s.config.db)
+	//connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", s.config.host, s.config.port, s.config.user, s.config.pass, s.config.db)
 
-	db, err := sql.Open("postgres", dbInfo)
+	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return err
 	}

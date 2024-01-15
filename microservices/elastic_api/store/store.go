@@ -34,7 +34,7 @@ func (s *Store) Get(phrase string) (string, error) {
 		s.db.Search.WithBody(strings.NewReader(`{
 		  "query": {
 			"query_string": {
-				"query": "title:\"Sience\""
+				"query": "title:\"` + phrase + `\""
 			}
 		  }
 		}`)),
