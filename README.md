@@ -11,9 +11,9 @@ redis
 postgre
 -------
 > 127.0.0.1:4042/student/get  
-> 127.0.0.1:4041/student/get/{id}  
+> 127.0.0.1:4042/student/get/{id}  
 > 127.0.0.1:4042/student/set  
-> 127.0.0.1:4041/attend/rate  
+> 127.0.0.1:4042/attend/rate  
 
 elastic
 -------
